@@ -13,6 +13,10 @@ body, html {
 
 :root{
     --primary-100: #1B9AAA;
+    --primary-200: #148796;
+    --primary-300: #0F6D7A;
+    --primary-400: #0A4B5E;
+    --primary-500: #062A42;
     --neutral-white: #FFFFFF;
     --neutral-black: #050505;
     --secondary-100: #F5F1E3;
