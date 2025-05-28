@@ -22,10 +22,14 @@
     <div class="flex-column-center-center">
         <h1>Sign In</h1>
         <form class="flex-column-center-center" action="login" method="POST">
-            <div class="error-output">
+            <div class="result-output">
                 <?php if (isset($error)) : ?>
                     <i class="fa-solid fa-triangle-exclamation"></i>
                     <span><?php echo $error; ?></span>
+                <?php endif; ?>
+                <?php if (isset($success)) : ?>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span><?php echo $success; ?></span>
                 <?php endif; ?>
             </div>
             <div class="auth-input">

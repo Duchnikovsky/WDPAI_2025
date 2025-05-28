@@ -87,6 +87,11 @@
                     cursor: pointer;
                 }
             }
+
+            .result-output {
+                width: 100%;
+                text-align: center;
+            }
         }
 
         .auth-subtext {
