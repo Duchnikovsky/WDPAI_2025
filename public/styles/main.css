@@ -37,3 +37,15 @@ body, html {
     justify-content: center;
     align-items: center;
 }
+
+.hide-desktop{
+    @media (min-width: 768px) {
+        display: none !important;
+    }
+}
+
+.hide-mobile{
+    @media (max-width: 768px) {
+        display: none !important;
+    }
+}
