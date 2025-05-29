@@ -32,7 +32,12 @@ class AuthController extends AppController
         }
 
         $url = "http://$_SERVER[HTTP_HOST]";
-        return header("Location: ${url}/dashboard");
+        $_SESSION['user'] = [
+            'email' => $user->getEmail(),
+            'role' => $user->getRole()
+        ];
+        header("Location: $url/dashboard");
+        exit;
     }
 
     public function register()

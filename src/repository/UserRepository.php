@@ -15,7 +15,7 @@ class UserRepository extends Repository
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($user) {
-            return User::fromDatabase($user['email'], $user['password']);
+            return User::fromDatabase($user['email'], $user['password'], $user['role']);
         }
 
         return null;

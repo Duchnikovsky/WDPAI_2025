@@ -2,17 +2,43 @@
 
 require_once 'AppController.php';
 
-class DefaultController extends AppController {
+class DefaultController extends AppController
+{
 
-    public function index() {
+    public function index()
+    {
+        if ($this->isLoggedIn()) {
+            header("Location: /dashboard");
+            exit;
+        }
         $this->render("login");
     }
 
-    public function dashboard(){
+    public function dashboard()
+    {
+        if (!$this->isLoggedIn()) {
+            header("Location: /index");
+            exit;
+        }
+
         $this->render("dashboard");
     }
-    
-    public function signup(){
+
+    public function signup()
+    {
+        if ($this->isLoggedIn()) {
+            header("Location: /dashboard");
+            exit;
+        }
+        
         $this->render("signup");
+    }
+
+    public function logout()
+    {
+        session_unset();
+        session_destroy();
+        header("Location: /index");
+        exit;
     }
 }

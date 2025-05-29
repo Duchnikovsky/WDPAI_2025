@@ -1,17 +1,21 @@
 <?php
 
-class AppController {
+class AppController
+{
     private $request;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->request = $_SERVER['REQUEST_METHOD'];
     }
 
-    protected function getRequestMethod() {
+    protected function getRequestMethod()
+    {
         return $this->request;
     }
 
-    protected function render(string $template = null, array $variables = []){
+    protected function render(string $template = null, array $variables = [])
+    {
         $templatePath = "public/views/" . $template . ".php";
         $output = "404 Not Found";
 
@@ -24,5 +28,15 @@ class AppController {
         }
 
         print $output;
+    }
+
+    protected function isLoggedIn()
+    {
+        return isset($_SESSION['user']);
+    }
+
+    protected function isAdmin()
+    {
+        return $this->isLoggedIn() && $_SESSION['user']['role'] === 'ADMIN';
     }
 }
