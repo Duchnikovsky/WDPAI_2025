@@ -34,6 +34,10 @@
         <div class="title">
             <h1>Books List</h1>
         </div>
+        <div class="search-mobile hide-desktop">
+            <i class="icon fa-solid fa-magnifying-glass"></i>
+            <input id="mobile-search" type="search" placeholder="Search for books" class="search-bar" />
+        </div>
         <div class="pagination"></div>
 
         <table class="books-table">

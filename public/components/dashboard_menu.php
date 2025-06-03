@@ -9,8 +9,8 @@
         <a href="/bestsellers"><i class="fas fa-ranking-star"></i> Bestsellers</a>
     </li>
     <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'ADMIN') : ?>
-        <li class="<?= ($_SERVER['REQUEST_URI'] === '/manage') ? 'active' : '' ?>">
-            <a href="/manage"><i class="fas fa-gear"></i> Books Management</a>
+        <li class="<?= ($_SERVER['REQUEST_URI'] === '/management') ? 'active' : '' ?>">
+            <a href="/management"><i class="fas fa-gear"></i> Books Management</a>
         </li>
     <?php endif; ?>
 </ul>

@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const searchInput = document.querySelector(".search-bar");
+    const searchInputs = document.querySelectorAll(".search-bar");
+    const isMobile = window.innerWidth <= 768;
     let currentPage = 1;
 
     function getQueryParam(param) {
@@ -71,12 +72,22 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.target.matches(".pagination-btn")) {
             e.preventDefault();
             const page = parseInt(e.target.dataset.page);
-            fetchBooks(page, searchInput.value);
+            if (isMobile) {
+                fetchBooks(page, searchInputs[1].value);
+            } else {
+                fetchBooks(page, searchInputs[0].value);
+            }
         }
     });
 
-    searchInput?.addEventListener("input", () => {
-        fetchBooks(1, searchInput.value);
+    searchInputs.forEach((input) => {
+        input.addEventListener("input", () => {
+            const value = input.value;
+            searchInputs.forEach((i) => {
+                if (i !== input) i.value = value; // synchronizacja inputów
+            });
+            fetchBooks(1, value);
+        });
     });
 
     fetchBooks();
