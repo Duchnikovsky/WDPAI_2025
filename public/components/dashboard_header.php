@@ -1,4 +1,4 @@
-<header>
+<header class="<?= ($_SERVER['REQUEST_URI'] === '/dashboard') ? 'search-visible' : '' ?>">
     <div class="hide-desktop">
         <img src="public/assets/images/logo.png" alt="logo" class="logo">
     </div>
