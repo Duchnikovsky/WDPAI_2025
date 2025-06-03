@@ -13,6 +13,7 @@
     <link href="public/styles/dashboard/dashboard.css" rel="stylesheet">
     <link href="public/styles/dashboard/aside.css" rel="stylesheet">
     <link href="public/styles/dashboard/header.css" rel="stylesheet">
+    <link href="public/styles/management/management.css" rel="stylesheet">
 
     <script src="public/scripts/menu.js" defer></script>
 
@@ -30,7 +31,8 @@
     </aside>
     <?php include 'public/components/dashboard_header.php'; ?>
     <main>
-
+        <h1>Books Management</h1>
+        <?php include 'public/components/management_addBook.php'; ?>
     </main>
 </body>
 

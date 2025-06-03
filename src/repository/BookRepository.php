@@ -63,6 +63,57 @@ class BookRepository extends Repository
         }
 
         $stmt->execute();
-        return (int) $stmt->fetchColumn();
+        return $stmt->fetchColumn();
+    }
+
+    public function findBookId(string $title, string $author, int $categoryId): ?int
+    {
+        $conn = $this->db->connect();
+
+        $stmt = $conn->prepare("
+        SELECT id FROM books 
+        WHERE title = :title AND author = :author AND category_id = :category_id
+        LIMIT 1
+    ");
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':author', $author);
+        $stmt->bindParam(':category_id', $categoryId);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ? $result['id'] : null;
+    }
+
+    public function addBook(string $title, string $author, int $categoryId): int
+    {
+        $conn = $this->db->connect();
+
+        $stmt = $conn->prepare("
+        INSERT INTO books (title, author, category_id)
+        VALUES (:title, :author, :category_id)
+        RETURNING id
+    ");
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':author', $author);
+        $stmt->bindParam(':category_id', $categoryId);
+        $stmt->execute();
+
+        return $stmt->fetchColumn();
+    }
+
+    public function addToLibrary(int $bookId, int $libraryId, int $quantity): void
+    {
+        $conn = $this->db->connect();
+
+        $stmt = $conn->prepare("
+        INSERT INTO book_stock (book_id, library_id, quantity)
+        VALUES (:book_id, :library_id, :quantity)
+        ON CONFLICT (book_id, library_id) DO UPDATE 
+        SET quantity = book_stock.quantity + EXCLUDED.quantity
+    ");
+        $stmt->bindParam(':book_id', $bookId);
+        $stmt->bindParam(':library_id', $libraryId);
+        $stmt->bindParam(':quantity', $quantity);
+        $stmt->execute();
     }
 }

@@ -28,4 +28,35 @@ class BookController extends AppController
             'currentPage' => $page
         ]);
     }
+
+    public function addBook()
+    {
+        if (!$this->isLoggedIn() || !$this->isAdmin() || $this->getRequestMethod() !== 'POST') {
+            header("Location: /dashboard");
+            exit;
+        }
+
+        $title = $_POST['title'] ?? '';
+        $author = $_POST['author'] ?? '';
+        $categoryId = $_POST['category'] ?? 0;
+        $libraryId = $_POST['library'] ?? 0;
+        $quantity = $_POST['quantity'] ?? 0;
+
+        if (!$title || !$author || !$categoryId || !$libraryId || $quantity <= 0) {
+            $this->render('dashboard', ['addError' => 'Invalid input']);
+            return;
+        }
+
+        $repo = new BookRepository();
+
+        $bookId = $repo->findBookId($title, $author, $categoryId);
+        if (!$bookId) {
+            $bookId = $repo->addBook($title, $author, $categoryId);
+        }
+
+        $repo->addToLibrary($bookId, $libraryId, $quantity);
+
+        header("Location: /dashboard");
+        exit;
+    }
 }

@@ -12,8 +12,10 @@ Routing::get('signup', 'DefaultController');
 Routing::get('logout', 'DefaultController');
 Routing::get('categories', 'DefaultController');
 Routing::get('bestsellers', 'DefaultController');
+Routing::get('management', 'DefaultController');
 Routing::post("login", 'AuthController');
 Routing::post("register", 'AuthController');
 Routing::post('books', 'BookController');
+Routing::post("addBook", 'BookController');
 
 Routing::run($path);

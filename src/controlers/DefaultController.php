@@ -68,4 +68,27 @@ class DefaultController extends AppController
 
         $this->render("bestsellers", ["bestsellers" => $bestsellers]);
     }
+
+    public function management()
+    {
+        if (!$this->isLoggedIn()) {
+            header("Location: /index");
+            exit;
+        }
+
+        if(!$this->isAdmin()) {
+            header("Location: /dashboard");
+            exit;
+        }
+
+        require_once __DIR__ . '/../repository/CategoryRepository.php';
+        require_once __DIR__ . '/../repository/LibraryRepository.php';
+
+        $categoryRepo = new CategoryRepository();
+        $categories = $categoryRepo->getAll();
+        $libraryRepo = new LibraryRepository();
+        $libraries = $libraryRepo->getAll();
+
+        $this->render("management", ["categories" => $categories, "libraries" => $libraries]);
+    }
 }
