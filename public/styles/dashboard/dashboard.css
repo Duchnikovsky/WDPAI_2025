@@ -1,5 +1,162 @@
 body {
     display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+
+    @media (min-width: 768px) {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+            "aside header"
+            "aside main";
+        aside {
+            grid-area: aside;
+        }
+
+        header {
+            grid-area: header;
+        }
+
+        main {
+            grid-area: main;
+        }
+    }
+
+    main {
+        width: 100%;
+        height: calc(100vh - 72px);
+        overflow-y: auto;
+        padding: 16px;
+
+        .pagination {
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+
+            .pagination-active,
+            .pagination-btn {
+                color: var(--neutral-black);
+                background-color: var(--secondary-200);
+                font-size: 14px;
+                line-height: 20px;
+                padding: 6px 16px;
+                border-radius: 8px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            }
+
+            .pagination-active {
+                font-weight: 700;
+            }
+
+            .pagination-btn {
+                text-decoration: none;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    cursor: pointer;
+                    background-color: var(--secondary-300);
+                }
+            }
+        }
+
+        .books-table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            font-size: 13px;
+            margin-top: 16px;
+
+            thead {
+                background-color: var(--secondary-200);
+
+                tr {
+                    th {
+                        padding: 12px;
+                        text-align: left;
+                        font-weight: 700;
+                        border-bottom: 1px solid #ddd;
+
+                        &:last-child {
+                            text-align: right;
+                            padding-right: 24px;
+                        }
+                    }
+
+                    th:nth-child(4),
+                    th:nth-child(5) {
+                        display: none;
+                    }
+                }
+            }
+
+            tbody {
+                tr {
+                    transition: background-color 0.2s ease;
+                    background-color: var(--neutral-white);
+
+                    &:nth-child(even) {
+                        background-color: var(--secondary-100);
+                    }
+
+                    &:hover {
+                        cursor: pointer;
+                        background-color: #f0f0f0;
+                    }
+
+                    &.out-of-stock {
+                        background-color: #d1d1d1;
+                    }
+
+                    td {
+                        padding: 12px;
+                        border-bottom: 1px solid #ddd;
+                        vertical-align: middle;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        max-width: 200px;
+
+                        &:first-child {
+                            width: 30px;
+                            text-align: center;
+                        }
+
+                        &:last-child {
+                            text-align: right;
+                            padding-right: 24px;
+                        }
+
+                        &:nth-child(4),
+                        &:nth-child(5) {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        @media (min-width: 992px) {
+            padding: 32px;
+
+            .books-table {
+                font-size: 14px;
+
+                thead tr th:nth-child(4),
+                thead tr th:nth-child(5),
+                tbody tr td:nth-child(4),
+                tbody tr td:nth-child(5) {
+                    display: table-cell;
+                }
+
+                tbody tr td {
+                    max-width: 250px;
+                }
+            }
+        }
+    }
 }
 
 .menu {
@@ -34,13 +191,18 @@ body {
             }
         }
 
-        &:hover {
+        &:hover,
+        &.active {
             cursor: pointer;
             background-color: var(--secondary-100);
         }
     }
 
     &.logout {
-        margin-top: auto;
+        margin-top: 16px;
+
+        @media (min-width: 768px) {
+            margin-top: auto;
+        }
     }
 }

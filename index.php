@@ -12,4 +12,6 @@ Routing::get('signup', 'DefaultController');
 Routing::get('logout', 'DefaultController');
 Routing::post("login", 'AuthController');
 Routing::post("register", 'AuthController');
+Routing::post('books', 'BookController');
+
 Routing::run($path);

@@ -6,40 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/8fd9367667.js" crossorigin="anonymous"></script>
 
     <link href="public/styles/main.css" rel="stylesheet">
+    <link href="public/styles/fonts.css" rel="stylesheet">
     <link href="public/styles/dashboard/dashboard.css" rel="stylesheet">
     <link href="public/styles/dashboard/aside.css" rel="stylesheet">
     <link href="public/styles/dashboard/header.css" rel="stylesheet">
 
     <script src="public/scripts/menu.js" defer></script>
+    <script src="public/scripts/books.js" defer></script>
 
     <title>Dashboard</title>
 </head>
 
 <body>
     <aside>
-        <div class="logo">
+        <div>
             <img src="public/assets/images/logo.png" alt="logo" class="logo">
         </div>
         <nav>
-            <ul class="menu">
-                <li><a href="/dashboard"><i class="fas fa-book"></i> Books List</a></li>
-                <li><a href="/dashboard/categories"><i class="fas fa-list"></i> Categories</a></li>
-                <li><a href="/dashboard/bestsellers"><i class="fas fa-ranking-star"></i> Bestsellers</a></li>
-                <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'ADMIN') : ?>
-                    <li><a href="/dashboard/manage"><i class="fas fa-gear"></i> Books Management</a></li>
-                <?php endif; ?>
-            </ul>
-            <ul class="menu logout">
-                <li><a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-            </ul>
+            <?php include 'public/components/dashboard_menu.php'; ?>
         </nav>
     </aside>
     <header>
-        <div class="logo hide-desktop">
+        <div class="hide-desktop">
             <img src="public/assets/images/logo.png" alt="logo" class="logo">
         </div>
         <i class="icon fa-solid fa-magnifying-glass hide-mobile"></i>
@@ -52,19 +43,44 @@
             <i class="fas fa-bars"></i>
         </div>
         <nav class="mobile-menu hide-desktop">
-            <ul class="menu">
-                <li><a href="/dashboard"><i class="fas fa-book"></i> Books List</a></li>
-                <li><a href="/dashboard/categories"><i class="fas fa-list"></i> Categories</a></li>
-                <li><a href="/dashboard/bestsellers"><i class="fas fa-ranking-star"></i> Bestsellers</a></li>
-                <li><a href="/profile"><i class="fas fa-user"></i> Your Profile</a></li>
-                <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'ADMIN') : ?>
-                    <li><a href="/dashboard/manage"><i class="fas fa-gear"></i> Books Management</a></li>
-                <?php endif; ?>
-                <li><a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-            </ul>
+            <?php include 'public/components/dashboard_menu.php'; ?>
         </nav>
     </header>
+    <main>
+        <div class="title">
+            <h1>Books List</h1>
+        </div>
+        <div class="pagination"></div>
 
+        <table class="books-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (isset($books) && is_array($books) && count($books) > 0): ?>
+                    <?php foreach ($books as $index => $book): ?>
+                        <tr class="<?php echo $book['quantity'] == 0 ? 'out-of-stock' : ''; ?>">
+                            <td><?php echo ($currentPage - 1) * $booksPerPage + $index + 1; ?></td>
+                            <td><?php echo htmlspecialchars($book['title']); ?></td>
+                            <td><?php echo htmlspecialchars($book['author']); ?></td>
+                            <td><?php echo htmlspecialchars($book['category']); ?></td>
+                            <td><?php echo htmlspecialchars($book['quantity']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="5">No books found.</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </main>
 </body>
 
 </html>

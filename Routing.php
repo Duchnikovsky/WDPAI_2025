@@ -2,24 +2,28 @@
 
 require_once 'src/controlers/DefaultController.php';
 require_once 'src/controlers/AuthController.php';
+require_once 'src/controlers/BookController.php';
 
-class Routing {
+class Routing
+{
     public static $routes;
 
-    public static function get($url, $controller) {
+    public static function get($url, $controller)
+    {
         self::$routes[$url] = $controller;
     }
 
-    public static function post($url, $controller) {
+    public static function post($url, $controller)
+    {
         self::$routes[$url] = $controller;
     }
 
-    public static function run($url){
+    public static function run($url)
+    {
         $action = explode('/', $url)[0];
 
-        if(!array_key_exists($action, self::$routes)){
+        if (!array_key_exists($action, self::$routes)) {
             die("404 Not Found");
-
         }
 
         $controller = self::$routes[$action];

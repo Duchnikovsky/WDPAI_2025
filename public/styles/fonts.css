@@ -1,9 +1,10 @@
-@font-face{
+@font-face {
     font-family: "Roboto";
     src: url("../assets/fonts/Roboto-Regular.ttf");
 }
 
-html, body {
+html,
+body {
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-weight: 400;
@@ -12,4 +13,17 @@ html, body {
 
 .no-wrap {
     white-space: nowrap;
+}
+
+.h1,
+h1 {
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 700;
+    margin: 0;
+
+    @media (min-width: 768px) {
+        font-size: 40px;
+    line-height: 48px;
+    }
 }
