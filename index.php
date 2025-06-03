@@ -11,6 +11,7 @@ Routing::get('dashboard', 'DefaultController');
 Routing::get('signup', 'DefaultController');
 Routing::get('logout', 'DefaultController');
 Routing::get('categories', 'DefaultController');
+Routing::get('bestsellers', 'DefaultController');
 Routing::post("login", 'AuthController');
 Routing::post("register", 'AuthController');
 Routing::post('books', 'BookController');
