@@ -2,11 +2,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.querySelector(".search-bar");
     let currentPage = 1;
 
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param) || "";
+    }
+
     function fetchBooks(page = 1, search = "") {
+        const category = getQueryParam("category");
         fetch("/books", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ page, search }),
+            body: JSON.stringify({ page, search, category }),
         })
             .then((res) => res.json())
             .then((data) => {

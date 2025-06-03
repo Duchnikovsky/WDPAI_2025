@@ -15,11 +15,12 @@ class BookController extends AppController
         $data = json_decode(file_get_contents("php://input"), true);
         $page = isset($data['page']) ? (int) $data['page'] : 1;
         $search = isset($data['search']) ? trim($data['search']) : '';
+        $category = $data['category'] ?? '';
 
         $repo = new BookRepository();
         $booksPerPage = 15;
-        $total = $repo->countBooks($search);
-        $books = $repo->getBooks($page, $booksPerPage, $search);
+        $total = $repo->countBooks($search, $category);
+        $books = $repo->getBooks($page, $booksPerPage, $search, $category);
 
         echo json_encode([
             'books' => $books,

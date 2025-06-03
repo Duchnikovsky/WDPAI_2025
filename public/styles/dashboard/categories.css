@@ -1,0 +1,40 @@
+.category-list {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    li {
+        width: 100%;
+        a {
+            width: 100%;
+            height: 100px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: var(--secondary-200);
+            border-radius: 16px;
+            box-shadow: 0 6px 10px var(--neutral-shadow);
+            color: var(--neutral-black);
+            transition: background-color 0.3s ease-in-out;
+
+            &:hover {
+                background-color: var(--secondary-300);
+            }
+
+            .fas {
+                font-size: 32px;
+                color: var(--primary-300);
+            }
+        }
+
+        @media (min-width: 640px) {
+            width: 300px;
+        }
+    }
+}

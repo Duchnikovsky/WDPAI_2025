@@ -44,11 +44,10 @@ class DefaultController extends AppController
 
     public function categories()
     {
-        if (!$this->isLoggedIn()) {
-            header("Location: /index");
-            exit;
-        }
+        require_once __DIR__ . '/../repository/CategoryRepository.php';
+        $repo = new CategoryRepository();
+        $categories = $repo->getAll();
 
-        $this->render("categories");
+        $this->render("categories", ["categories" => $categories]);
     }
 }

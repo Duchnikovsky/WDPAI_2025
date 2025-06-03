@@ -13,6 +13,7 @@
     <link href="public/styles/dashboard/dashboard.css" rel="stylesheet">
     <link href="public/styles/dashboard/aside.css" rel="stylesheet">
     <link href="public/styles/dashboard/header.css" rel="stylesheet">
+    <link href="public/styles/dashboard/categories.css" rel="stylesheet">
 
     <script src="public/scripts/menu.js" defer></script>
 
@@ -30,6 +31,19 @@
     </aside>
     <?php include 'public/components/dashboard_header.php'; ?>
     <main>
+        <div class="title">
+            <h1>Book Categories</h1>
+        </div>
+        <ul class="category-list">
+            <?php foreach ($categories as $category): ?>
+                <li>
+                    <a href="/dashboard?category=<?php echo urlencode($category['name']); ?>">
+                        <i class="fas <?php echo htmlspecialchars($category['icon']); ?>"></i>
+                        <?php echo htmlspecialchars($category['name']); ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
     </main>
 </body>
 
