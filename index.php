@@ -10,6 +10,7 @@ Routing::get('index', 'DefaultController');
 Routing::get('dashboard', 'DefaultController');
 Routing::get('signup', 'DefaultController');
 Routing::get('logout', 'DefaultController');
+Routing::get('categories', 'DefaultController');
 Routing::post("login", 'AuthController');
 Routing::post("register", 'AuthController');
 Routing::post('books', 'BookController');

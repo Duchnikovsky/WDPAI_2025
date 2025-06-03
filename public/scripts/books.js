@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentPage = 1;
 
     function fetchBooks(page = 1, search = "") {
-        console.log(`Fetching books for page ${page} with search "${search}"`);
         fetch("/books", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -30,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (book.quantity == 0) row.classList.add("out-of-stock");
 
             row.innerHTML = `
-                <td>${(currentPage - 1) * 10 + index + 1}</td>
+                <td>${(currentPage - 1) * 15 + index + 1}</td>
                 <td>${book.title}</td>
                 <td>${book.author}</td>
                 <td>${book.category}</td>

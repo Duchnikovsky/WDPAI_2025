@@ -30,7 +30,7 @@ class DefaultController extends AppController
             header("Location: /dashboard");
             exit;
         }
-        
+
         $this->render("signup");
     }
 
@@ -40,5 +40,15 @@ class DefaultController extends AppController
         session_destroy();
         header("Location: /index");
         exit;
+    }
+
+    public function categories()
+    {
+        if (!$this->isLoggedIn()) {
+            header("Location: /index");
+            exit;
+        }
+
+        $this->render("categories");
     }
 }

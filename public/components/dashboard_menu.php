@@ -3,14 +3,14 @@
         <a href="/dashboard"><i class="fas fa-book"></i> Books List</a>
     </li>
     <li class="<?= ($_SERVER['REQUEST_URI'] === '/dashboard/categories') ? 'active' : '' ?>">
-        <a href="/dashboard/categories"><i class="fas fa-list"></i> Categories</a>
+        <a href="/categories"><i class="fas fa-list"></i> Categories</a>
     </li>
     <li class="<?= ($_SERVER['REQUEST_URI'] === '/dashboard/bestsellers') ? 'active' : '' ?>">
-        <a href="/dashboard/bestsellers"><i class="fas fa-ranking-star"></i> Bestsellers</a>
+        <a href="/bestsellers"><i class="fas fa-ranking-star"></i> Bestsellers</a>
     </li>
     <?php if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'ADMIN') : ?>
         <li class="<?= ($_SERVER['REQUEST_URI'] === '/dashboard/manage') ? 'active' : '' ?>">
-            <a href="/dashboard/manage"><i class="fas fa-gear"></i> Books Management</a>
+            <a href="/manage"><i class="fas fa-gear"></i> Books Management</a>
         </li>
     <?php endif; ?>
 </ul>
