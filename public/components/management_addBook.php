@@ -1,4 +1,4 @@
-<form class="form-books" action="addBook" method="POST">
+<form class="form-management" action="addBook" method="POST">
     <h2>Add New Book</h2>
     <?php if (isset($addError)) : ?>
         <i class="fa-solid fa-triangle-exclamation"></i>

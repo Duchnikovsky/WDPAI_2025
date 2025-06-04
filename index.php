@@ -17,5 +17,6 @@ Routing::post("login", 'AuthController');
 Routing::post("register", 'AuthController');
 Routing::post('books', 'BookController');
 Routing::post("addBook", 'BookController');
+Routing::post("addCategory", 'CategoryController');
 
 Routing::run($path);

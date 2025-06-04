@@ -3,6 +3,7 @@
 require_once 'src/controlers/DefaultController.php';
 require_once 'src/controlers/AuthController.php';
 require_once 'src/controlers/BookController.php';
+require_once 'src/controlers/CategoryController.php';
 
 class Routing
 {

@@ -33,6 +33,7 @@
     <main>
         <h1>Books Management</h1>
         <?php include 'public/components/management_addBook.php'; ?>
+        <?php include 'public/components/management_addCategory.php'; ?>
     </main>
 </body>
 
