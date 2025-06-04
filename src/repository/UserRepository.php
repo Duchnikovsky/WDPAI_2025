@@ -50,4 +50,24 @@ class UserRepository extends Repository
         $stmt->bindParam(':code', $accessCode, PDO::PARAM_STR);
         $stmt->execute();
     }
+
+    public function generateUniqueCode(): string
+    {
+        do {
+            $code = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+            $exists = $this->db->connect()
+                ->prepare("SELECT 1 FROM registration_codes WHERE code = :code");
+            $exists->bindParam(':code', $code, PDO::PARAM_STR);
+            $exists->execute();
+        } while ($exists->fetch());
+
+        return $code;
+    }
+
+    public function saveAccessCode(string $code): void
+    {
+        $stmt = $this->db->connect()->prepare("INSERT INTO registration_codes (code, created_at) VALUES (:code, NOW())");
+        $stmt->bindParam(':code', $code, PDO::PARAM_STR);
+        $stmt->execute();
+    }
 }

@@ -84,4 +84,31 @@ class AuthController extends AppController
 
         $this->render("login", ["success" => "Registration successful! You can now log in."]);
     }
+
+    public function generateCodes()
+    {
+        if (!$this->isLoggedIn() || !$this->isAdmin() || $this->getRequestMethod() !== 'POST') {
+            header("Location: /dashboard");
+            exit;
+        }
+
+        $quantity = (int)($_POST['quantity'] ?? 0);
+
+        if ($quantity < 1 || $quantity > 100) {
+            $this->render('management', ['codeError' => 'You must generate between 1 and 100 codes.']);
+            return;
+        }
+
+        require_once __DIR__ . '/../repository/UserRepository.php';
+        $repo = new UserRepository();
+        $codes = [];
+
+        for ($i = 0; $i < $quantity; $i++) {
+            $code = $repo->generateUniqueCode();
+            $repo->saveAccessCode($code);
+            $codes[] = $code;
+        }
+
+        $this->render('management', ['generatedCodes' => $codes]);
+    }
 }
