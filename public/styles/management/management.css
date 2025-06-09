@@ -2,12 +2,13 @@ main {
     width: 100%;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 16px;
 
     @media (min-width: 768px) {
         flex-direction: row;
         gap: 32px;
+        flex-wrap: wrap;
     }
 
     .form-management {
