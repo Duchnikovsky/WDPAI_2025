@@ -34,6 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
         books.forEach((book, index) => {
             const row = document.createElement("tr");
             if (book.quantity == 0) row.classList.add("out-of-stock");
+            row.onclick = () => {
+                window.location.href = `/book?id=${book.id}`;
+            };
 
             row.innerHTML = `
                 <td>${(currentPage - 1) * 15 + index + 1}</td>

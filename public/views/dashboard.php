@@ -51,21 +51,6 @@
                 </tr>
             </thead>
             <tbody>
-                <?php if (isset($books) && is_array($books) && count($books) > 0): ?>
-                    <?php foreach ($books as $index => $book): ?>
-                        <tr class="<?php echo $book['quantity'] == 0 ? 'out-of-stock' : ''; ?>">
-                            <td><?php echo ($currentPage - 1) * $booksPerPage + $index + 1; ?></td>
-                            <td><?php echo htmlspecialchars($book['title']); ?></td>
-                            <td><?php echo htmlspecialchars($book['author']); ?></td>
-                            <td><?php echo htmlspecialchars($book['category']); ?></td>
-                            <td><?php echo htmlspecialchars($book['quantity']); ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <tr>
-                        <td colspan="5">No books found.</td>
-                    </tr>
-                <?php endif; ?>
             </tbody>
         </table>
     </main>

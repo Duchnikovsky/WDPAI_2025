@@ -12,7 +12,7 @@ class BookRepository extends Repository
         $searchTerm = "%$search%";
 
         $stmt = $conn->prepare("
-        SELECT b.title, b.author, c.name AS category, COALESCE(SUM(bs.quantity), 0) AS quantity
+        SELECT b.id, b.title, b.author, c.name AS category, COALESCE(SUM(bs.quantity), 0) AS quantity
         FROM books b
         JOIN categories c ON b.category_id = c.id
         LEFT JOIN book_stock bs ON b.id = bs.book_id
