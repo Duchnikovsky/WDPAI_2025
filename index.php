@@ -13,6 +13,7 @@ Routing::get('signup', 'DefaultController');
 Routing::get('categories', 'DefaultController');
 Routing::get('bestsellers', 'DefaultController');
 Routing::get('management', 'DefaultController');
+Routing::get('book', 'DefaultController');
 
 //API routes
 Routing::get('logout', 'DefaultController');
@@ -22,5 +23,6 @@ Routing::post('books', 'BookController');
 Routing::post("addBook", 'BookController');
 Routing::post("addCategory", 'CategoryController');
 Routing::post("generateCodes", 'AuthController');
+Routing::post("reserve", "ReservationController");
 
 Routing::run($path);

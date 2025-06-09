@@ -76,7 +76,7 @@ class DefaultController extends AppController
             exit;
         }
 
-        if(!$this->isAdmin()) {
+        if (!$this->isAdmin()) {
             header("Location: /dashboard");
             exit;
         }
@@ -90,5 +90,41 @@ class DefaultController extends AppController
         $libraries = $libraryRepo->getAll();
 
         $this->render("management", ["categories" => $categories, "libraries" => $libraries]);
+    }
+
+    public function book()
+    {
+        if (!$this->isLoggedIn()) {
+            header("Location: /index");
+            exit;
+        }
+
+        if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+            $this->render("book", ["error" => "Book not found"]);
+            return;
+        }
+
+        $bookId = (int) $_GET['id'];
+
+        require_once __DIR__ . '/../repository/BookRepository.php';
+        require_once __DIR__ . '/../repository/LibraryRepository.php';
+
+        $bookRepo = new BookRepository();
+        $libraryRepo = new LibraryRepository();
+
+        $book = $bookRepo->getBookById($bookId);
+        $availability = $bookRepo->getBookAvailability($bookId);
+        $libraries = $libraryRepo->getAll();
+
+        if (!$book) {
+            $this->render("book", ["error" => "Book not found"]);
+            return;
+        }
+
+        $this->render("book", [
+            "book" => $book,
+            "availability" => $availability,
+            "libraries" => $libraries
+        ]);
     }
 }

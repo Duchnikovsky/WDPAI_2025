@@ -116,4 +116,31 @@ class BookRepository extends Repository
         $stmt->bindParam(':quantity', $quantity);
         $stmt->execute();
     }
+
+    public function getBookById(int $id): ?array
+    {
+        $stmt = $this->db->connect()->prepare("
+        SELECT b.id, b.title, b.author, c.name as category
+        FROM books b
+        JOIN categories c ON b.category_id = c.id
+        WHERE b.id = :id
+    ");
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
+
+    public function getBookAvailability(int $bookId): array
+    {
+        $stmt = $this->db->connect()->prepare("
+        SELECT l.name AS library, bs.quantity
+        FROM book_stock bs
+        JOIN libraries l ON bs.library_id = l.id
+        WHERE bs.book_id = :book_id
+        ORDER BY l.name ASC
+    ");
+        $stmt->bindParam(':book_id', $bookId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
