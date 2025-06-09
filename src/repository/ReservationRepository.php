@@ -46,4 +46,23 @@ class ReservationRepository extends Repository
 
         return $code;
     }
+
+    public function getReservationsByEmail(string $email): array
+    {
+        $conn = $this->db->connect();
+
+        $stmt = $conn->prepare("
+        SELECT r.reservation_code, r.reserved_at, r.status, b.title, b.author, l.name AS library
+        FROM reservations r
+        JOIN users u ON r.user_id = u.id
+        JOIN books b ON r.book_id = b.id
+        JOIN libraries l ON r.library_id = l.id
+        WHERE u.email = :email
+        ORDER BY r.reserved_at DESC
+    ");
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

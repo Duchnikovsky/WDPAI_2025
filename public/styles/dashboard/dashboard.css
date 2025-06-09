@@ -115,7 +115,8 @@ body {
                     }
 
                     th:nth-child(4),
-                    th:nth-child(5) {
+                    th:nth-child(5),
+                    th:nth-child(6) {
                         display: none;
                     }
                 }
@@ -159,7 +160,8 @@ body {
                         }
 
                         &:nth-child(4),
-                        &:nth-child(5) {
+                        &:nth-child(5),
+                        &:nth-child(6) {
                             display: none;
                         }
                     }
@@ -175,8 +177,10 @@ body {
 
                 thead tr th:nth-child(4),
                 thead tr th:nth-child(5),
+                thead tr th:nth-child(6),
                 tbody tr td:nth-child(4),
-                tbody tr td:nth-child(5) {
+                tbody tr td:nth-child(5),
+                tbody tr td:nth-child(6) {
                     display: table-cell;
                 }
 

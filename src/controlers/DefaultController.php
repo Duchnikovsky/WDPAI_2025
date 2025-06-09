@@ -127,4 +127,27 @@ class DefaultController extends AppController
             "libraries" => $libraries
         ]);
     }
+
+    public function profile()
+    {
+        if (!$this->isLoggedIn()) {
+            header("Location: /index");
+            exit;
+        }
+
+        require_once __DIR__ . '/../repository/ReservationRepository.php';
+        require_once __DIR__ . '/../repository/UserRepository.php';
+
+        $userRepository = new UserRepository();
+        $reservationRepository = new ReservationRepository();
+
+        $email = $_SESSION['user']['email'];
+        $user = $userRepository->getUserByEmail($email);
+        $reservations = $reservationRepository->getReservationsByEmail($email);
+
+        $this->render("profile", [
+            'user' => $user,
+            'reservations' => $reservations
+        ]);
+    }
 }

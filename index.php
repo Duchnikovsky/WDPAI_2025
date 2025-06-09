@@ -14,6 +14,7 @@ Routing::get('categories', 'DefaultController');
 Routing::get('bestsellers', 'DefaultController');
 Routing::get('management', 'DefaultController');
 Routing::get('book', 'DefaultController');
+Routing::get('profile', 'DefaultController');
 
 //API routes
 Routing::get('logout', 'DefaultController');
