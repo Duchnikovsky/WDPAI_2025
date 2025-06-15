@@ -79,6 +79,12 @@ Bookly to system do zarządzania wypożyczalnią książek dla uczelni wyższych
 
 ---
 
+## Diagram ERD
+![WDPAI diagram](https://github.com/user-attachments/assets/e85ebdfe-4b4f-426c-97db-90e1e0c89533)
+
+
+---
+
 ## 🛠️ Struktura projektu
 
 📦 Bookly/
